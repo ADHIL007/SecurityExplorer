@@ -19,29 +19,16 @@ public class SecurityExplorerMiddleware
     {
         var path = context.Request.Path.Value ?? string.Empty;
 
-        var isRoot = path.Equals(_url, StringComparison.OrdinalIgnoreCase) ||
-                     path.Equals(_url + "/", StringComparison.OrdinalIgnoreCase) ||
-                     path.Equals(_url + "/index.html", StringComparison.OrdinalIgnoreCase);
-
-        var isRun = path.Equals(_url + "/run", StringComparison.OrdinalIgnoreCase) ||
-                    path.Equals(_url + "/api/run", StringComparison.OrdinalIgnoreCase);
-
-        if (isRoot)
+        // Redirect exact match without trailing slash to ensure relative paths work
+        if (path.Equals(_url, StringComparison.OrdinalIgnoreCase))
         {
-            var assembly = typeof(SecurityExplorerMiddleware).Assembly;
-            using var stream = assembly.GetManifestResourceStream("SecurityExplorer.UI.wwwroot.index.html");
-            if (stream == null)
-            {
-                context.Response.StatusCode = 404;
-                context.Response.ContentType = "text/plain";
-                await context.Response.WriteAsync("Embedded index.html not found.");
-                return;
-            }
-
-            context.Response.ContentType = "text/html; charset=utf-8";
-            await stream.CopyToAsync(context.Response.Body);
+            context.Response.Redirect(_url + "/");
             return;
         }
+
+        // 1. API Route: Execute Tests
+        var isRun = path.Equals(_url + "/run", StringComparison.OrdinalIgnoreCase) ||
+                    path.Equals(_url + "/api/run", StringComparison.OrdinalIgnoreCase);
 
         if (isRun)
         {
@@ -52,6 +39,52 @@ public class SecurityExplorerMiddleware
             var json = JsonSerializer.Serialize(results);
             await context.Response.WriteAsync(json);
             return;
+        }
+
+        // 2. Serve Embedded Static UI Files
+        if (path.StartsWith(_url, StringComparison.OrdinalIgnoreCase))
+        {
+            var relativePath = path.Substring(_url.Length).TrimStart('/');
+            if (string.IsNullOrEmpty(relativePath))
+            {
+                relativePath = "index.html"; // Default document
+            }
+
+            // Convert path to embedded resource name (e.g., "styles.css" -> "SecurityExplorer.UI.wwwroot.styles.css")
+            var resourceName = $"SecurityExplorer.UI.wwwroot.{relativePath.Replace("/", ".")}";
+            var assembly = typeof(SecurityExplorerMiddleware).Assembly;
+            
+            // Perform case-insensitive search to handle Windows/Browser casing discrepancies
+            var actualResourceName = assembly.GetManifestResourceNames()
+                .FirstOrDefault(name => name.Equals(resourceName, StringComparison.OrdinalIgnoreCase));
+
+            if (actualResourceName != null)
+            {
+                using var stream = assembly.GetManifestResourceStream(actualResourceName);
+                if (stream != null)
+                {
+                    var ext = Path.GetExtension(relativePath).ToLowerInvariant();
+                    context.Response.ContentType = ext switch
+                    {
+                        ".html" => "text/html; charset=utf-8",
+                        ".css" => "text/css; charset=utf-8",
+                        ".js" => "application/javascript; charset=utf-8",
+                        _ => "text/plain"
+                    };
+                    
+                    await stream.CopyToAsync(context.Response.Body);
+                    return;
+                }
+            }
+            
+            if (relativePath.Equals("index.html", StringComparison.OrdinalIgnoreCase))
+            {
+                 // Fallback error if the main shell is truly missing
+                 context.Response.StatusCode = 404;
+                 context.Response.ContentType = "text/plain";
+                 await context.Response.WriteAsync("Embedded index.html not found. Ensure it is set as an EmbeddedResource.");
+                 return;
+            }
         }
 
         await _next(context);
