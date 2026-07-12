@@ -1,4 +1,4 @@
-
+﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.31903.59
@@ -12,6 +12,10 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SecurityExplorer.UI", "src\SecurityExplorer.UI\SecurityExplorer.UI.csproj", "{77584FA6-6B62-4E97-9FA3-EC151266EA30}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SecurityExplorer", "src\SecurityExplorer\SecurityExplorer.csproj", "{EEF20B11-ADAC-48BD-A6A5-44F69FC20E07}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "plugins", "plugins", "{07D57EEB-2F50-60C4-C011-FE4FA775C9A8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SecurityExplorer.Plugin.Demo", "plugins\SecurityExplorer.Plugin.Demo\SecurityExplorer.Plugin.Demo.csproj", "{F20E285D-B749-412A-A39E-92EA0BDB30A6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -71,6 +75,18 @@ Global
 		{EEF20B11-ADAC-48BD-A6A5-44F69FC20E07}.Release|x64.Build.0 = Release|Any CPU
 		{EEF20B11-ADAC-48BD-A6A5-44F69FC20E07}.Release|x86.ActiveCfg = Release|Any CPU
 		{EEF20B11-ADAC-48BD-A6A5-44F69FC20E07}.Release|x86.Build.0 = Release|Any CPU
+		{F20E285D-B749-412A-A39E-92EA0BDB30A6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F20E285D-B749-412A-A39E-92EA0BDB30A6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F20E285D-B749-412A-A39E-92EA0BDB30A6}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{F20E285D-B749-412A-A39E-92EA0BDB30A6}.Debug|x64.Build.0 = Debug|Any CPU
+		{F20E285D-B749-412A-A39E-92EA0BDB30A6}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{F20E285D-B749-412A-A39E-92EA0BDB30A6}.Debug|x86.Build.0 = Debug|Any CPU
+		{F20E285D-B749-412A-A39E-92EA0BDB30A6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F20E285D-B749-412A-A39E-92EA0BDB30A6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F20E285D-B749-412A-A39E-92EA0BDB30A6}.Release|x64.ActiveCfg = Release|Any CPU
+		{F20E285D-B749-412A-A39E-92EA0BDB30A6}.Release|x64.Build.0 = Release|Any CPU
+		{F20E285D-B749-412A-A39E-92EA0BDB30A6}.Release|x86.ActiveCfg = Release|Any CPU
+		{F20E285D-B749-412A-A39E-92EA0BDB30A6}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -80,5 +96,6 @@ Global
 		{FDD2C5DC-0D0D-4483-8794-8D7BA0A1F28A} = {827E0CD3-B72D-47B6-A68D-7590B98EB39B}
 		{77584FA6-6B62-4E97-9FA3-EC151266EA30} = {827E0CD3-B72D-47B6-A68D-7590B98EB39B}
 		{EEF20B11-ADAC-48BD-A6A5-44F69FC20E07} = {827E0CD3-B72D-47B6-A68D-7590B98EB39B}
+		{F20E285D-B749-412A-A39E-92EA0BDB30A6} = {07D57EEB-2F50-60C4-C011-FE4FA775C9A8}
 	EndGlobalSection
 EndGlobal

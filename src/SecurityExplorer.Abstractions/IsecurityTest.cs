@@ -4,7 +4,7 @@ namespace SecurityExplorer.Abstractions;
 /// Represents a single security test or check.
 /// Can be an active attack (SQLi) or a passive check (Log config).
 /// </summary>
-public interface IsecurityTest
+public interface ISecurityTest
 {
     /// <summary>
     /// Unique name displayed in the dashboard (e.g., "SQL Injection", "Log Monitor")

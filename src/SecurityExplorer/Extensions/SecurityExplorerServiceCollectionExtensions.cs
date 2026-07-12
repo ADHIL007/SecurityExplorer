@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
+using SecurityExplorer.Abstractions;
 using SecurityExplorer.Core;
 using SecurityExplorer.UI;
 
@@ -10,13 +11,22 @@ namespace SecurityExplorer.Extensions;
 public static class SecurityExplorerServiceCollectionExtensions
 {
 
-    public static IApplicationBuilder UseSecurityExplorer(this IApplicationBuilder app)
+
+    public static IServiceCollection AddSecurityExplorer(this IServiceCollection services)
     {
-        var options = app.ApplicationServices.GetRequiredService<IOptions<SecurityExplorerOptions>>().Value;
+        services.Configure<SecurityExplorerOptions>(options => { });
+        var assemblies = AppDomain.CurrentDomain.GetAssemblies();
+        var testTypes = assemblies
+            .SelectMany(a => a.GetTypes())
+            .Where(t => typeof(IsecurityTest).IsAssignableFrom(t) && !t.IsInterface && !t.IsAbstract);
 
-        return app.UseMiddleware<SecurityExplorerMiddleware>(options.RoutePrefix);
+        foreach (var type in testTypes)
+        {
+            services.AddTransient(typeof(IsecurityTest), type);
+        }
 
+        services.AddScoped<SecurityTestRunner>();
+        return services;
     }
-
 }
 

@@ -1,27 +1,21 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.AspNetCore.Builder;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Options;
 using SecurityExplorer.Abstractions;
 using SecurityExplorer.Core;
+using SecurityExplorer.UI;
 
 namespace SecurityExplorer.Extensions;
 
 public static class SecurityExplorerApplicationBuilderExtensions
 {
 
-    public static IServiceCollection AddSecurityExplorer(this IServiceCollection services)
+    public static IApplicationBuilder UseSecurityExplorer(this IApplicationBuilder app)
     {
-        services.Configure<SecurityExplorerOptions>(options => { });
-        var assemblies = AppDomain.CurrentDomain.GetAssemblies();
-        var testTypes = assemblies
-            .SelectMany(a => a.GetTypes())
-            .Where(t => typeof(IsecurityTest).IsAssignableFrom(t) && !t.IsInterface && !t.IsAbstract);
+        var options = app.ApplicationServices.GetRequiredService<IOptions<SecurityExplorerOptions>>().Value;
 
-        foreach (var type in testTypes)
-        {
-            services.AddTransient(typeof(IsecurityTest), type);
-        }
+        return app.UseMiddleware<SecurityExplorerMiddleware>(options.RoutePrefix);
 
-        services.AddScoped<SecurityTestRunner>();
-        return services;
     }
 }
 

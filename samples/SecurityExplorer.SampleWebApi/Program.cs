@@ -3,7 +3,6 @@ using SecurityExplorer.SampleWebApi.Data;
 using SecurityExplorer.SampleWebApi.Extensions;
 using SecurityExplorer.SampleWebApi.Middleware;
 using Serilog;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
 Log.Logger = new LoggerConfiguration()
     .MinimumLevel.Information()
     .WriteTo.Console()
