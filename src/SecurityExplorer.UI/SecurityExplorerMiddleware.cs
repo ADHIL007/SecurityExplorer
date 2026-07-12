@@ -22,7 +22,7 @@ public class SecurityExplorerMiddleware
         if (context.Request.Path.StartsWithSegments(_url))
         {
             var baseUrl = $"{context.Request.Scheme}://{context.Request.Host}";
-            var results = testRunner.ExecuteAllTestsAsync(baseUrl);
+            var results = await testRunner.ExecuteAllTestsAsync(baseUrl);
 
             context.Response.ContentType = "application/json";
             var json = JsonSerializer.Serialize(results);

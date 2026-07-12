@@ -2,13 +2,13 @@
 
 namespace SecurityExplorer.Plugin.Demo;
 
-public class HeaderSecurityCheck : IsecurityTest
+public class HeaderSecurityCheck : ISecurityTest
 {
-    string IsecurityTest.Name => "Missing Security Headers";
+    string ISecurityTest.Name => "Missing Security Headers";
 
-    string IsecurityTest.Category => "Passive";
+    string ISecurityTest.Category => "Passive";
 
-    Task<TestResult> IsecurityTest.ExecuteAsync(TestContext context)
+    Task<TestResult> ISecurityTest.ExecuteAsync(TestContext context)
     {
         return Task.FromResult(new TestResult
         {

@@ -6,10 +6,10 @@ namespace SecurityExplorer.Core;
 
 public class SecurityTestRunner
 {
-    private readonly IEnumerable<IsecurityTest> _secTests;
+    private readonly IEnumerable<ISecurityTest> _secTests;
     private readonly ILogger<SecurityTestRunner> _logger;
 
-    public SecurityTestRunner(IEnumerable<IsecurityTest> secTests, ILogger<SecurityTestRunner> logger)
+    public SecurityTestRunner(IEnumerable<ISecurityTest> secTests, ILogger<SecurityTestRunner> logger)
     {
         _secTests = secTests;
         _logger = logger;

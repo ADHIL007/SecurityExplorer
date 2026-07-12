@@ -3,6 +3,8 @@ using SecurityExplorer.SampleWebApi.Data;
 using SecurityExplorer.SampleWebApi.Extensions;
 using SecurityExplorer.SampleWebApi.Middleware;
 using Serilog;
+using SecurityExplorer.Extensions;
+
 Log.Logger = new LoggerConfiguration()
     .MinimumLevel.Information()
     .WriteTo.Console()
@@ -19,6 +21,7 @@ builder.Services.AddControllers();
 builder.Services.AddAppServices();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerJwtSecurity();
+builder.Services.AddSecurityExplorer();
 
 
 builder.Services.AddDbContext<AppDbContext>(options =>
@@ -40,6 +43,7 @@ builder.Services.AddDepositories();
 var app = builder.Build();
 
 app.UseMiddleware<ExceptionHandlingMiddleware>();
+app.UseSecurityExplorer();
 app.UseHttpsRedirection();
 
 app.UseRouting();
