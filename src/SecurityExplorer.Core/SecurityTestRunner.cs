@@ -16,9 +16,9 @@ public class SecurityTestRunner
     }
 
 
-    public async Task<List<TestResult>> ExecuteAllTestsAsync(string BaseAddress)
+    public async Task<List<SecurityTestOutput>> ExecuteAllTestsAsync(string BaseAddress)
     {
-        var Results = new List<TestResult>();
+        var Results = new List<SecurityTestOutput>();
         using var HttpClient = new HttpClient { BaseAddress = new Uri(BaseAddress) };
         try
         {
@@ -48,12 +48,15 @@ public class SecurityTestRunner
 
             _logger.LogError(ex.Message);
 
-            Results.Add(new TestResult
+            Results.Add(new SecurityTestOutput
             {
-                Status = TestStatus.Error,
-                Title = "Exception Occured",
-                Description = ex.Message,
-                Evidence = ex.StackTrace
+                Result = new TestResult
+                {
+                    Status = TestStatus.Error,
+                    Title = "Exception Occured",
+                    Description = ex.Message,
+                    Evidence = ex.StackTrace
+                }
             });
 
         }

@@ -18,6 +18,6 @@ public interface ISecurityTest
     /// <summary>
     /// The core logic executed by the engine.
     /// </summary>
-    Task<TestResult> ExecuteAsync(TestContext context);
+    Task<SecurityTestOutput> ExecuteAsync(TestContext context);
 
 }
