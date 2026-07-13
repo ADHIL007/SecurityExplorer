@@ -1,36 +1,29 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Developer Security Test Suite</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-      margin: 0;
-      background: #f4f4f4;
-    }
-    .box {
-      text-align: center;
-      padding: 2rem 3rem;
-      background: white;
-      border-radius: 10px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-    }
-    h1 {
-      margin: 0 0 0.5rem;
-      color: #222;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Developer Security Test Suite</title>
+    <link rel="stylesheet" href="Styles.css">
 </head>
 <body>
-  <div class="box">
-    <h1>Hello Developer,</h1>
-    <h2>Welcome to Developer Security Test Suite</h2>
-  </div>
+    <div class="sidebar">
+        <div class="sidebar-header">Security Explorer</div>
+        
+        <ul class="sidebar-menu">
+            <li id="mainMenu"><a href="#" class="active" onclick="loadDashboard()">Dashboard</a></li>
+        </ul>
+
+        <div class="plugins-section">Plugins</div>
+        <ul class="sidebar-menu" id="pluginsMenu">
+            <li class="no-plugins">Loading plugins...</li>
+        </ul>
+    </div>
+
+    <div class="main-content" id="appRoot">
+        <!-- Decoupled HTML views will be injected here -->
+    </div>
+
+    <script src="Scripts.js"></script>
 </body>
 </html>

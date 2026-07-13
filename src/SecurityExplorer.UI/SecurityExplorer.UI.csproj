@@ -5,6 +5,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <EmbeddedResource Include="wwwroot\**\*" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\SecurityExplorer.Core\SecurityExplorer.Core.csproj" />
     <ProjectReference Include="..\SecurityExplorer.Abstractions\SecurityExplorer.Abstractions.csproj" />
   </ItemGroup>

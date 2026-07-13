@@ -169,6 +169,6 @@ The framework automatically discovers and registers plugins during application s
 
 ## License
 
-This project is licensed under the MIT License.
+This project is licensed under the LICENSE-APACHE-2.0.
 
 See the LICENSE file for details.

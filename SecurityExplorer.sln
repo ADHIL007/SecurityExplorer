@@ -1,4 +1,4 @@
-
+﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.31903.59
@@ -12,6 +12,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SecurityExplorer.UI", "src\SecurityExplorer.UI\SecurityExplorer.UI.csproj", "{77584FA6-6B62-4E97-9FA3-EC151266EA30}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SecurityExplorer", "src\SecurityExplorer\SecurityExplorer.csproj", "{EEF20B11-ADAC-48BD-A6A5-44F69FC20E07}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "plugins", "plugins", "{07D57EEB-2F50-60C4-C011-FE4FA775C9A8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -80,5 +82,8 @@ Global
 		{FDD2C5DC-0D0D-4483-8794-8D7BA0A1F28A} = {827E0CD3-B72D-47B6-A68D-7590B98EB39B}
 		{77584FA6-6B62-4E97-9FA3-EC151266EA30} = {827E0CD3-B72D-47B6-A68D-7590B98EB39B}
 		{EEF20B11-ADAC-48BD-A6A5-44F69FC20E07} = {827E0CD3-B72D-47B6-A68D-7590B98EB39B}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {54C77CDB-A585-451E-8E3C-B7A13916CBDA}
 	EndGlobalSection
 EndGlobal

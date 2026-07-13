@@ -6,19 +6,19 @@ namespace SecurityExplorer.Core;
 
 public class SecurityTestRunner
 {
-    private readonly IEnumerable<IsecurityTest> _secTests;
+    private readonly IEnumerable<ISecurityTest> _secTests;
     private readonly ILogger<SecurityTestRunner> _logger;
 
-    public SecurityTestRunner(IEnumerable<IsecurityTest> secTests, ILogger<SecurityTestRunner> logger)
+    public SecurityTestRunner(IEnumerable<ISecurityTest> secTests, ILogger<SecurityTestRunner> logger)
     {
         _secTests = secTests;
         _logger = logger;
     }
 
 
-    public async Task<List<TestResult>> ExecuteAllTestsAsync(string BaseAddress)
+    public async Task<List<SecurityTestOutput>> ExecuteAllTestsAsync(string BaseAddress)
     {
-        var Results = new List<TestResult>();
+        var Results = new List<SecurityTestOutput>();
         using var HttpClient = new HttpClient { BaseAddress = new Uri(BaseAddress) };
         try
         {
@@ -48,12 +48,15 @@ public class SecurityTestRunner
 
             _logger.LogError(ex.Message);
 
-            Results.Add(new TestResult
+            Results.Add(new SecurityTestOutput
             {
-                Status = TestStatus.Error,
-                Title = "Exception Occured",
-                Description = ex.Message,
-                Evidence = ex.StackTrace
+                Result = new TestResult
+                {
+                    Status = TestStatus.Error,
+                    Title = "Exception Occured",
+                    Description = ex.Message,
+                    Evidence = ex.StackTrace
+                }
             });
 
         }
